@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-Grey'; do
-  for type in '' '-Nord' '-Dracula'; do
+  for type in '' '-Nord' '-Dracula' '-Kanagawa'; do
     case "$theme" in
       '')
         theme_color_dark='#3c84f7'
@@ -123,6 +123,46 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-
       esac
     fi
 
+    if [[ "$type" == '-Kanagawa' ]]; then
+      case "$theme" in
+        '')
+          theme_color_dark='#223249'
+          theme_color_light='#2d4f67'
+          ;;
+        -Purple)
+          theme_color_dark='#957fb8'
+          theme_color_light='#938aa9'
+          ;;
+        -Pink)
+          theme_color_dark='#e46876'
+          theme_color_light='#d27e99'
+          ;;
+        -Red)
+          theme_color_dark='#e82424'
+          theme_color_light='#ff5d62'
+          ;;
+        -Orange)
+          theme_color_dark='#ff8940'
+          theme_color_light='#ffa066'
+          ;;
+        -Yellow)
+          theme_color_dark='#c0a36e'
+          theme_color_light='#e6c384'
+          ;;
+        -Green)
+          theme_color_dark='#76946a'
+          theme_color_light='#98bb6c'
+          ;;
+        -Teal)
+          theme_color_dark='#658594'
+          theme_color_light='#7aa89f'
+          ;;
+        -Grey)
+          theme_color_dark='#404060'
+          theme_color_light='#dbdbdc'
+          ;;
+      esac
+    fi
     if [[ "$type" != '' ]]; then
       rm -rf "theme${theme}${type}"
       cp -rf "theme" "theme${theme}${type}"
