@@ -91,7 +91,8 @@
   }
 
   .toolbar {
-    padding: 0;
+    padding: 2px;
+    margin: -2px;
 
     button {
       @extend %button-flat;
@@ -102,6 +103,14 @@
     separator {
       margin: $space-size 0;
     }
+  }
+
+  &.background.csd .toolbar {
+    border-radius: 0 0 $window-radius $window-radius;
+  }
+
+  &.background.csd.maximized .toolbar {
+    border-radius: 0;
   }
 
   .view {

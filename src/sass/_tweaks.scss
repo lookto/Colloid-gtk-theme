@@ -1,5 +1,5 @@
 
-// Theme ColorScheme palette: default/nord
+// Theme ColorScheme palette: default/nord/dracula
 @import 'color-palette-default';
 
 $colorscheme: 'default';
@@ -27,3 +27,6 @@ $rimless: 'false';
 
 // Windows button style : mac/normal
 $window_button: 'mac';
+
+// Gnome-Shell float panel version
+$float: 'false';

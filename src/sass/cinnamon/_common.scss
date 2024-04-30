@@ -245,7 +245,7 @@ StScrollBar {
 // Tooltip
 //
 #Tooltip {
-  border-radius: $circular-radius;
+  border-radius: $window-radius;
   padding: $space-size $space-size * 2;
   background-color: $tooltip;
   color: on($tooltip);
@@ -268,10 +268,14 @@ $menu_item_radius: $corner-radius;
 %menu {
   padding: 0;
   color: $text;
-  background-color: $popover;
+  // background-color: $popover;
   border-radius: $menu-radius;
   margin: $space-size;
-  box-shadow: 0 5px 12px rgba(black, 0.35);
+  box-shadow: none;
+
+  @if $rimless == 'false' and  $variant == 'dark' {
+    border: 1px solid $window-border;
+  }
 
   &-arrow { icon-size: 16px; }
 
@@ -296,21 +300,18 @@ $menu_item_radius: $corner-radius;
   .popup-menu-content {
     padding: $space-size;
     border-radius: $menu-radius;
-    background-clip: padding-box;
     background-color: $popover;
+    box-shadow: 0 5px 12px rgba(black, 0.35);
 
-    @if $rimless == 'false' {
-      box-shadow: inset 0 0 0 1px highlight($popover);
-
-      @if $variant == 'dark' {
-        border: 1px solid $window-border;
-      }
+    @if $rimless == 'false' and $variant == 'dark' {
+      border: 1px solid highlight($popover);
+      background-clip: border-box;
     }
   }
 
   .popup-menu-item {
-    padding: $space-size $space-size*2;
-    spacing: $space-size*2;
+    padding: $space-size $space-size * 2;
+    spacing: $space-size * 2;
     border-radius: $menu_item_radius;
 
     &:hover, &:active {
@@ -676,15 +677,12 @@ $menu_item_radius: $corner-radius;
 //
 
 //calendar-background allows the date applet calendar to be themed separately from other applet menus*/
-.calendar-background {
-}
-
 .calendar-main-box {
-  margin: 0 $space-size;
+  margin: 0 .8em;
 }
 
 .calendar {
-  padding: $space-size $space-size * 2;
+  // padding: $space-size $space-size * 2;
   spacing-rows: 0px;
   spacing-columns: 0px;
 }
@@ -714,15 +712,15 @@ $menu_item_radius: $corner-radius;
 .calendar-month-label {
   color: $text;
   font-weight: bold;
-  margin: 0 2px;
-  padding: 2px; // label centering
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .calendar-change-month-back,
 .calendar-change-month-forward {
-  width: 24px;
-  height: 24px;
-  margin: 0;
+  width: 2.4em;
+  height: 2.4em;
+  margin: 2px 0;
   padding: 0;
   border-radius: $circular-radius;
 
@@ -759,8 +757,8 @@ $menu_item_radius: $corner-radius;
 
 .calendar-day-base {
   text-align: center;
-  width: 28px;
-  height: 28px;
+  width: 2.4em;
+  height: 2.4em;
   padding: 0;
   margin: 2px;
   border-radius: $circular-radius;
@@ -814,12 +812,12 @@ $menu_item_radius: $corner-radius;
 }
 
 .calendar-week-number {
-  width: 20px;
-  height: 20px;
-  margin: 6px 0;
+  width: 2.4em;
+  height: 2.4em;
+  margin: 0;
   color: $track;
   font-weight: bold;
-  background-color: $fill;
+  background-color: transparent;
   border-radius: $circular-radius;
 
   StLabel {
@@ -839,9 +837,6 @@ $menu_item_radius: $corner-radius;
   background-gradient-start: $fill;
   background-gradient-end: $fill;
   color: $text-secondary;
-}
-
-.calendar-events-no-events-box {
 }
 
 .calendar-events-no-events-button {
@@ -881,9 +876,6 @@ $menu_item_radius: $corner-radius;
   padding: 2px;
 }
 
-.calendar-events-scrollbox {
-}
-
 .calendar-events-main-box .separator {
   -margin-horizontal: 1em;
   -gradient-height: 1px;
@@ -894,11 +886,10 @@ $menu_item_radius: $corner-radius;
 .calendar-event-button {
   margin: $space-size 0 $space-size 0;
   border-radius: $corner-radius;
+  background-color: $fill;
 
   &:hover {
-    background-gradient-direction: vertical;
-    background-gradient-start: $fill;
-    background-gradient-end: $fill;
+    background-color: $divider;
     box-shadow: none;
   }
 }
@@ -969,8 +960,8 @@ $menu_item_radius: $corner-radius;
   spacing-columns: $space-size*1.5;
   margin-from-right-edge-of-screen: $space-size*3;
   width: 28em;
-  color: $text;
-  background-color: rgba($base, 0.8);
+  color: on($tooltip);
+  background-color: $tooltip;
   box-shadow: 0 5px 12px rgba(black, 0.35);
   margin: 7px 12px 17px 12px;
 
@@ -985,12 +976,12 @@ $menu_item_radius: $corner-radius;
   .popup-menu & {
     border: none;
     border-radius: $corner-radius;
-    background-color: rgba($text, 0.05);
+    background-color: $fill;
     box-shadow: none;
     margin: 0;
 
     &:hover {
-      background-color: rgba($text, 0.1);
+      background-color: $divider;
       box-shadow: 0 3px 8px rgba(black, 0.15);
     }
 
@@ -1006,7 +997,7 @@ $menu_item_radius: $corner-radius;
 
   &.multi-line-notification {
     padding-bottom: $space-size*2;
-    color: $text;
+    color: on($tooltip);
   }
 
   &-scrollview {
@@ -1025,7 +1016,7 @@ $menu_item_radius: $corner-radius;
 .notification {
   &-with-image {
     min-height: 159px;
-    color: $text;
+    color: on($tooltip);
   }
 
   &-button, &-icon-button {
@@ -1658,6 +1649,15 @@ $menu_item_radius: $corner-radius;
 
   &-thumbnail-menu {
     padding: $space-size;
+    margin: $space-size;
+    background-color: $popover;
+    border-radius: $menu-radius;
+    background-clip: border-box;
+    box-shadow: 0 5px 12px rgba(black, 0.35);
+
+    @if $rimless == 'false' and $variant == 'dark' {
+      border: 1px solid $window-border;
+    }
 
     .item-box {
       padding: $space-size;
@@ -1688,7 +1688,7 @@ $menu_item_radius: $corner-radius;
     z-index: 120;
     text-shadow: none;
     color: on($primary);
-    padding: 0;
+    padding: 0 1px;
   }
 
   &-button-label {
